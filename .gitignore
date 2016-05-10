@@ -1,0 +1,8 @@
+Library/
+obj/
+*.csproj
+*.pdb
+*.sln
+*.userprefs
+.vs/
+MacBuild.app/
