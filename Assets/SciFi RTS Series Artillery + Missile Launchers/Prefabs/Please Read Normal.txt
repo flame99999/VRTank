@@ -1,0 +1,11 @@
+The prefabs in this folder are intended to be used with my other RTS Series models, e.g. tanks 
+ or artillery.
+
+The models are ca. 1-3 unity units big.
+
+
+If you want to use these models separately you should use the prefabs in the folder: 
+
+			"PrefabsUnityDimensions"
+
+The prefabs in the above mentioned folder are scaled bigger so that each models is at least two unity units big.

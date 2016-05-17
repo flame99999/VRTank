@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 [System.Serializable] 
 public struct MyItemImage
@@ -17,6 +18,8 @@ public class CameraPointCheck : MonoBehaviour {
 	public Transform m_EyePoint;
 	public AudioSource m_audioSource;
 	public GameObject m_explosion;
+	public ParticleSystem m_muzzleFlashEffect;
+	public ParticleSystem m_fireSmokeEffect;
 
 	[SerializeField] public MyItemImage[] m_ItemImage = new MyItemImage[6];
 
@@ -72,26 +75,30 @@ public class CameraPointCheck : MonoBehaviour {
 
 					if (m_rectWidth == 199.0f) {
 						m_audioSource.Play ();
+						m_muzzleFlashEffect.Play (); 
+						m_fireSmokeEffect.Play ();
 					}
 
 					if (m_rectWidth >= 200.0f) {
 						m_rectWidth = 200.0f;
 
-						if(m_audioSource.isPlaying && m_explosion.activeSelf==false){
-							if (m_audioSource.time >= 3.0f) {
-								m_explosion.transform.position = hit.point;
-								m_explosion.SetActive (true);
-							}
-							//m_debugText.text = m_audioSource.time.ToString ();
-						}
+//						if(m_audioSource.isPlaying && m_explosion.activeSelf==false){
+//							if (m_audioSource.time >= 3.0f) {
+//								//m_explosion.transform.position = hit.point;
+//								//m_explosion.SetActive (true);
+//							}
+//							//m_debugText.text = m_audioSource.time.ToString ();
+//						}
 
 
-						if(m_audioSource.isPlaying==false){
+						//if(m_audioSource.isPlaying==false)
+						if(m_audioSource.time >= 0.8f)
+						{
 							switch (index) {
 							case 2:
-								UIEvent.StartScene ("Demo Scene");
-								break;
 							case 4:
+								UIEvent.StartScene ("Arthur_multi");
+								//SceneManager.LoadSceneAsync ("Arthur_multi");
 								break;
 							case 5:
 								Application.Quit ();

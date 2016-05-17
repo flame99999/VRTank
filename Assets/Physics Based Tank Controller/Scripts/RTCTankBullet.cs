@@ -9,6 +9,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 [RequireComponent (typeof (Rigidbody))]
 
 public class RTCTankBullet : MonoBehaviour {
@@ -37,12 +38,20 @@ public class RTCTankBullet : MonoBehaviour {
 	
 
 	void OnCollisionEnter (Collision col) {
-	
-		Explosion();
+
+        GameObject hit = col.gameObject;
+        if (hit.tag == "Player")
+            hit.GetComponent<Health>().TakeDamage(20);         
+        
+        Explosion();
 		
 	}
-
-	void Explosion(){
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(gameObject);
+    }
+    void Explosion(){
 
 		Instantiate(explosionPrefab, transform.position, transform.rotation);
 		Collider[] colliders = Physics.OverlapSphere(transform.position, 5f);
@@ -52,9 +61,8 @@ public class RTCTankBullet : MonoBehaviour {
 				hit.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius, .3f);
 			}
 		}
-
-		Destroy (gameObject);
-		
+        StartCoroutine(wait());
+	
 	}
 
 }

@@ -1,0 +1,12 @@
+The prefabs in this folder are intended to be used as stand alone models. they are scaled to unity 
+dimensions and are at least two unity units big.
+
+
+
+If you want to use the models together with my other RTS Series models like "Tanks" or
+"Artillery" you should use the prefabs in the folder: 
+
+					"Prefabs"
+
+The prefabs in the above mentioned folder are scaled smaller so that the models sizes are
+in relation to each other.

@@ -9,6 +9,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.VR;
 
 public class RTCCamera : MonoBehaviour
 {
@@ -42,21 +43,25 @@ public class RTCCamera : MonoBehaviour
 	
 	void LateUpdate()
 	{
-		if(tank != null)
-		{
+        if (!VRSettings.enabled)
+        {
+            if (tank != null)
+            {
 
-			x += (float)(Input.GetAxis("Mouse X") * xSpeed * 0.02f);
-			y -= (float)(Input.GetAxis("Mouse Y") * ySpeed * 0.02f);
-			
-			y = ClampAngle(y, yMinLimit, yMaxLimit);
-			
-			Quaternion rotation = Quaternion.Euler(y, x, 0);
-			Vector3 position = rotation * (new Vector3(0.0f, heightOffset, -distance)) + tank.position;
-			
-			transform.rotation = rotation;
-			transform.position = position;
+                x += (float)(Input.GetAxis("Mouse X") * xSpeed * 0.02f);
+                y -= (float)(Input.GetAxis("Mouse Y") * ySpeed * 0.02f);
 
-		}
+                y = ClampAngle(y, yMinLimit, yMaxLimit);
+
+                Quaternion rotation = Quaternion.Euler(y, x, 0);
+                Vector3 position = rotation * (new Vector3(0.0f, heightOffset, -distance)) + tank.position;
+
+                transform.rotation = rotation;
+                transform.position = position;
+
+            }
+        }
+		
 	}
 	
 	private float ClampAngle(float angle, float min, float max)
